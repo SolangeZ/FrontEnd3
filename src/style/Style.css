@@ -298,29 +298,3 @@ footer .imgperfil {
 .container button:hover {
   background-color: #f22147;
 }
-
-/* ================ERROR===================== 
-.err {
-  display: flex;
-  justify-content: center;
-}
-
-.err>h1 {
-  background-color: #ff0073;
-  color: #fff;
-  padding: 30px;
-  border-radius: 30px;
-}
-
-.err>button {
-  position: absolute;
-  top: 20%;
-  background-color: #f22147;
-  border-radius: 10px;
-  border-style: none;
-  color: #fff;
-  cursor: pointer;
-  margin-top: 20px;
-  height: 5vh;
-  width: 7vw;
-} */
