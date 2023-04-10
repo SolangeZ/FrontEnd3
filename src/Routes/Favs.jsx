@@ -1,16 +1,28 @@
-import React from "react";
-
-//Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
+import React, { useContext } from "react";
+import { ContextFavs } from "../Context/ContextFavs";
 
 const Favs = () => {
+  const { state } = useContext(ContextFavs);
 
   return (
     <>
       <h1>Dentists Favorites</h1>
-      <div className="card-grid">
-        {/* este componente debe consumir los destacados del localStorage */}
-        {/* Deberan renderizar una Card por cada uno de ellos */}
-      </div>
+
+      <section className="card-favorites">
+        {state.data?.map((data) => (
+          <div>
+            <img
+              src="./images/doctor.jpg"
+              alt="imagen doctor"
+              style={{
+                borderRadius: "50%",
+              }}
+            />
+            <h5> {data.name}</h5>
+            <p>{data.username}</p>
+          </div>
+        ))}
+      </section>
     </>
   );
 };

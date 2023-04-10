@@ -1,35 +1,34 @@
-import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
-import { DarkContext } from '../Context/DarkContext';
-
-
-//Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import "../style/Style.css";
+import { ContextDarkMode } from "../Context/ContextDarkMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 
 const Navbar = () => {
-  const { isDarkMode, handleMode } = useContext (DarkContext);
+  const { isDarkMode, setIsDarkMode } = useContext(ContextDarkMode);
 
-
-    
-  const handleDarkMode = () =>{
-    handleMode();
-  
-  }
+  const handleDarkMode = () => {
+    if (isDarkMode) {
+      setIsDarkMode(false);
+    } else {
+      setIsDarkMode(true);
+    }
+  };
 
   return (
-    <nav className={isDarkMode? "dark" : null}>
-      {/* Aqui deberan agregar los liks correspondientes a las rutas definidas */}
-      {/* Deberan implementar ademas la logica para cambiar de Theme con el button */}
-      
-      <div className='logo'>
-          <img src='./images/planDenta.jpg' alt='logo' className='planDental'/>
+    <nav className={isDarkMode ? "dark" : "app"}>
+      <div className="logo">
+        <img src="./images/logoclinica.JPG" alt="Logo Dental clinic " />
       </div>
-      <Link to="/">Home</Link>
-      <Link to="/contact">Contact</Link>
-      <Link to="/favs">Favorites</Link>
-
-      <button onClick={handleDarkMode}>Dark mode </button>
+      <div className="navbar">
+        <Link to="/home">Home</Link>
+        <Link to="/contact">Contact</Link>
+        <Link to="/favs">Favs</Link>
+        <button onClick={handleDarkMode}>
+          <DarkModeIcon className="icons" alt="logo Facebook" />
+        </button>
+      </div>
     </nav>
-  )
-} 
-
-export default Navbar  
+  );
+};
+export default Navbar;

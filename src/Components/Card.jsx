@@ -1,31 +1,39 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { ContextFavs } from "../Context/ContextFavs";
+import "../style/Style.css";
+import StarIcon from "@mui/icons-material/Star";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 
 const Card = ({ name, username, id }) => {
-  const navigate =  useNavigate();
-  
+  const { state, dispatch } = useContext(ContextFavs);
+
   const addFav = () => {
-    // Aqui iria la logica para agregar la Card en el localStorage
+    dispatch({ type: "ADD", payload: { name, username, id } });
   };
-  
-  const item = () => {
-    navigate(`/home/detail/${id}`);
+
+  const disAdd = () => {
+    dispatch({ type: "DISADD", payload: { name, username, id } });
   };
 
   return (
-    <div className="card" onClick={item}>
-      {/* En cada card deberan mostrar en name - username y el id */}
-      <img src="./images/doctor.jpg" alt='DH-logo'/>
-      <p>{id}</p>
-      <p>{name}</p>
+    <div className="card">
+      <img src="./images/doctor.jpg" alt="doctor" />
+      <h5> {name}</h5>
       <p>{username}</p>
-
-      {/* No debes olvidar que la Card a su vez servira como Link hacia la pagina de detalle */}
-
-      {/* Ademas deberan integrar la logica para guardar cada Card en el localStorage */}
-      <button onClick={addFav} className="favButton">
-        Add fav
-      </button>
+      {state.data.some((element) => element.id === id) ? (
+        <Link onClick={disAdd} className="favButton">
+          <StarIcon className="icons" alt="icon add" />
+        </Link>
+      ) : (
+        <Link onClick={addFav} className="favButton">
+          <StarBorderIcon className="icons" alt="icon disAdd" />
+        </Link>
+      )}
+      <Link to={`/users/${id}`}>
+        <ManageSearchIcon className="icons" alt="icon detail" />
+      </Link>
     </div>
   );
 };
